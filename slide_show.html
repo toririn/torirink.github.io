@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Meiryo'; }
+      h1, h2, h3 {
+        font-family: 'ＭＳ　Ｐ　ゴシック';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Design Doc
+
+～Slack まとめアプリ～
+
+---
+
+# 目次
+
+1. 目的
+2. 背景
+3. 設計
+4. 品質
+5. セキュリティ
+
+---
+
+# 目的
+　社内のコミュニケーションチャットツールである Slack の活性化させるため、 Slack をより使いやすく便利なツールへと改良するWebアプリを制作する。
+
+---
+
+# 背景
+　Slack　のチャンネル間を超えた検索機能や、絵文字のリアクション機能、リマインド機能など、 Slack 独自の機能をうまく使う事で、
+　他のコミュニケーションツールによりも社内コミュニケーションがより円滑に進むことが期待される。
+　しかし、現状まだ　Slack　を利用している社員は多くなく、利用頻度も少ない状況である。
+
+　社内のコミュニケーションの向上の他、ナレッジの共有のためにも、Slackを活性化させ、
+　最終的には Slack を有料版へ移行させたいという背景がある。
+
+---
+
+# 設計
+### 開発環境
+* Linux(Debian 8.0)
+* DB:MySQL
+
+### 言語・フレームワーク
+* Ruby 2.2.0
+* Rails 4.2
+
+### その他使用ツール
+* Slack Web API
+* gem:slack-api
+
+---
+
+# ポリシー
+
+* **拡張性を高くする。**
+
+　　=>今後多くの機能が新たに追加されていくことを常に意識する。
+
+* **リーダブルアーキテクチャ**
+
+　　=>機能毎に細かくレイヤーを切り分ける。どの機能がどのレイヤーにあるのか必ず明確にする。
+
+* **リーダブルコード**
+
+　　=>新たに機能を追加するときときに、初めて開発をする人がすぐに理解できるコードを書く。
+
+---
+
+# 開発するコンポーネントの種類
+
+* 社内から要望・提案があった機能
+
+---
+
+# 品質
+
+### どのように品質を保つのか
+* テストコード
+* 仕様書に基づいた動作確認
+
+### テストをどこまでするのか
+* 各モジュール・クラス別の単体テストコードによるコードガバレッジ100%
+* ユースケースを考慮した結合(feature)テスト
+* 本番環境リリース前に、一連の動作確認テスト
+
+---
+
+# セキュリティ
+
+### 守らなくてはいけない情報
+* Slack内に記載されている情報全て
+
+### いかにして守るのか
+* アプリのページへ移動する前のBasic認証を行う
+* アプリを利用するために Slack へのログイン＆認証の許可　を必須とする
+* ログイン情報の有効期限の設定
+* アクセスログの集計
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
